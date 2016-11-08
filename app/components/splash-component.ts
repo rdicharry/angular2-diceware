@@ -13,9 +13,10 @@ export class SplashComponent implements OnInit {
 	dicewareRollSearch: string = null;
 	dicewareWordSearch: string = null;
 
-	constructor(private dicewareService: DicewareService, private router: Router) {}
+	constructor(private dicewareService: DicewareService, private router: Router) {
+	}
 
-	ngOnInit() : void {
+	ngOnInit(): void {
 		this.dicewareService.getAllDiceware()
 			.subscribe(dicewareRolls => {
 				this.dicewareRolls = dicewareRolls;
@@ -23,7 +24,7 @@ export class SplashComponent implements OnInit {
 			});
 	}
 
-	filterByRoll() : void {
+	filterByRoll(): void {
 		if(this.dicewareRollSearch !== null) {
 			this.dicewareWordSearch = null;
 			this.dicewareRollsFiltered = this.dicewareRolls.filter((diceware: Diceware) => diceware.roll.indexOf(this.dicewareRollSearch) >= 0);
@@ -32,7 +33,7 @@ export class SplashComponent implements OnInit {
 		}
 	}
 
-	filterByWord() : void {
+	filterByWord(): void {
 		if(this.dicewareWordSearch !== null) {
 			this.dicewareRollSearch = null;
 			this.dicewareRollsFiltered = this.dicewareRolls.filter((diceware: Diceware) => diceware.word.indexOf(this.dicewareWordSearch.toLowerCase()) >= 0);
@@ -41,6 +42,7 @@ export class SplashComponent implements OnInit {
 		}
 	}
 
-	switchDiceware(diceware : Diceware) : void {
+	switchDiceware(diceware: Diceware): void {
 		this.router.navigate(["/diceware/", diceware.roll]);
 	}
+}
